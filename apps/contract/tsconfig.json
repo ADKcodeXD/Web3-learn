@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/hardhat.json",
+  "include": [
+    "./scripts",
+    "./test",
+    "./typechain-types",
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "cache",
+    "artifacts"
+  ]
+}

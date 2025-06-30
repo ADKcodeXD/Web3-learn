@@ -1,0 +1,42 @@
+{
+  "name": "@repo/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:testnet": "hardhat run scripts/deploy.ts --network sepolia",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "clean": "hardhat clean",
+    "generate-types": "hardhat compile && typechain --target ethers-v6 --out-dir src/types 'artifacts/contracts/**/*.sol/!(*.dbg.json)'",
+    "dev": "hardhat node"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "ethers": "^6.8.0",
+    "hardhat": "^2.19.0",
+    "typechain": "^8.3.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.9",
+    "@nomicfoundation/hardhat-ethers": "^3.0.9",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.13",
+    "@nomicfoundation/hardhat-verify": "^2.0.14",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^20.0.0",
+    "chai": "^4.3.0",
+    "dotenv": "^16.3.0",
+    "hardhat-gas-reporter": "^2.3.0",
+    "solidity-coverage": "^0.8.16",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.2"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@repo/web3-utils",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@repo/web3-types": "*",
+    "ethers": "^6.8.0",
+    "viem": "^2.0.0"
+  }
+}
