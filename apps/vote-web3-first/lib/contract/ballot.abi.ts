@@ -123,21 +123,4 @@ export const BALLOT_ABI = [
     stateMutability: 'view',
     type: 'function',
   },
-] as const
-
-// 合约地址 - 需要部署后替换为实际地址
-export const BALLOT_CONTRACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
-
-// 支持的网络
-export const SUPPORTED_NETWORKS = {
-  hardhat: {
-    chainId: 1337,
-    name: 'Hardhat Local',
-    rpcUrl: 'http://127.0.0.1:8545',
-  },
-  sepolia: {
-    chainId: 11155111,
-    name: 'Sepolia Testnet',
-    rpcUrl: 'https://sepolia.infura.io/v3/YOUR_INFURA_KEY',
-  },
-} as const
+]

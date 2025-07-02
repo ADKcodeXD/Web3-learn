@@ -1,4 +1,18 @@
 const hre = require('hardhat')
+const chairPerson = '0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199'
+
+async function deployPaymentAccount() {
+  const PaymentAccountFactory = await hre.ethers.getContractFactory('PaymentAccount')
+  const paymentAccount = await PaymentAccountFactory.deploy(chairPerson)
+  await paymentAccount.waitForDeployment()
+  const paymentAccountAddress = await paymentAccount.getAddress()
+  console.log('✅ PaymentAccount 合约部署成功!')
+  console.log('📍 合约地址:', paymentAccountAddress)
+  return {
+    paymentAccount,
+    paymentAccountAddress,
+  }
+}
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners()
@@ -30,25 +44,13 @@ async function main() {
 
   const BallotFactory = await hre.ethers.getContractFactory('Ballot')
   const ballot = await BallotFactory.deploy(proposalNamesBytes32)
-
   await ballot.waitForDeployment()
   const ballotAddress = await ballot.getAddress()
 
+  const { paymentAccount, paymentAccountAddress } = await deployPaymentAccount()
+
   console.log('✅ Ballot 合约部署成功!')
   console.log('📍 合约地址:', ballotAddress)
-
-  // 检查提案
-  console.log('\n📋 已部署的提案:')
-  for (let i = 0; i < proposalNames.length; i++) {
-    try {
-      const proposal = await ballot.proposals(i)
-      const decodedName = hre.ethers.decodeBytes32String(proposal.name)
-      console.log(`   ${i}: ${decodedName} (票数: ${proposal.voteCount})`)
-    } catch (error) {
-      console.log(`   ${i}: 无法解码提案名称 (票数: ${(await ballot.proposals(i)).voteCount})`)
-    }
-  }
-
   // 保存部署信息
   const deploymentInfo = {
     network: (await hre.ethers.provider.getNetwork()).name,
@@ -62,16 +64,11 @@ async function main() {
         proposalNamesBytes32: proposalNamesBytes32,
         constructorArgs: [proposalNamesBytes32],
       },
+      PaymentAccount: {
+        address: paymentAccountAddress,
+      },
     },
   }
-
-  console.log('\n📋 部署信息:')
-  // 使用说明
-  console.log('\n📖 使用说明:')
-  console.log('1. 任何人都可以调用 winningProposal() 查看获胜提案')
-  console.log('2. 任何人都可以调用 winnerName() 查看获胜提案名称')
-
-  console.log('\n🎉 部署完成!')
 
   return {
     ballot,

@@ -13,8 +13,8 @@ import type {
   ContractDeployTransaction,
   ContractRunner,
 } from "ethers";
-import type { NonPayableOverrides } from "../common";
-import type { Ballot, BallotInterface } from "../Ballot";
+import type { NonPayableOverrides } from "../../common";
+import type { Ballot, BallotInterface } from "../../poll.sol/Ballot";
 
 const _abi = [
   {

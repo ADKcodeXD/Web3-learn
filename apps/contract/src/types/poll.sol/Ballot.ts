@@ -19,7 +19,7 @@ import type {
   TypedEventLog,
   TypedListener,
   TypedContractMethod,
-} from "./common";
+} from "../common";
 
 export declare namespace Ballot {
   export type ProposalStruct = { name: BytesLike; voteCount: BigNumberish };

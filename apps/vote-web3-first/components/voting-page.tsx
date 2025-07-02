@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useBallot } from '@/hooks/use-ballot'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
   AlertDialog,
@@ -18,7 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Wallet, Vote, Users, Crown, Trophy, UserPlus, ArrowRight, Wifi, WifiOff } from 'lucide-react'
+import { Wallet, Vote, Users, Trophy, Wifi, WifiOff } from 'lucide-react'
 
 export function VotingPage() {
   const {
@@ -36,7 +34,6 @@ export function VotingPage() {
     networkInfo,
   } = useBallot()
 
-  const [voterAddress, setVoterAddress] = useState('')
   const [winner, setWinner] = useState<string | null>(null)
 
   const handleGetWinner = async () => {
@@ -182,7 +179,7 @@ export function VotingPage() {
             ) : (
               <div className="grid gap-4">
                 {proposals.map((proposal, index) => (
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between" key={index}>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg mr-2">{proposal.name}</CardTitle>
                       <Badge variant="default">{proposal.voteCount} 票</Badge>
@@ -200,7 +197,7 @@ export function VotingPage() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>确认投票</AlertDialogTitle>
                           <AlertDialogDescription>
-                            您确定要投票给 "{proposal.name}" 吗？投票后无法更改。
+                            您确定要投票给 &quot;{proposal.name}&quot; 吗？投票后无法更改。
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
